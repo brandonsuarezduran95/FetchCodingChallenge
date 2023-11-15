@@ -9,9 +9,20 @@ import SwiftUI
 
 @main
 struct FetchCodingChallengeApp: App {
+    @State private var showLaunchView: Bool = true
+    let mainView: some View = ContentView()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ZStack {
+                mainView.opacity(0.0)
+                if showLaunchView {
+                    LaunchView(showLaunchView: $showLaunchView)
+                        .transition(.move(edge: .leading))
+                } else {
+                    mainView.opacity(1.0)
+                }
+            }
         }
     }
 }
